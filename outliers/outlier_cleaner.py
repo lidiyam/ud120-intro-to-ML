@@ -14,12 +14,13 @@ def outlierCleaner(predictions, ages, net_worths):
     cleaned_data = []
 
     ### your code goes here
-    # calculate the error, sort in descending order, take 90% of the data
-    
-    errors = (net_worths-predictions)**2
-    cleaned_data = zip(ages,net_worths,errors)
-    cleaned_data = sorted(cleaned_data,key=lambda x:x[2][0], reverse=True)
-    limit = int(len(net_worths)*0.1)
+    for i in range(0, len(predictions)):
+        cleaned_data.append( (ages[i], net_worths[i], (predictions[i] - net_worths[i])**2) )
+
+    cleaned_data = sorted(cleaned_data, key=lambda tup: tup[2])
+
+    cleaned_data = cleaned_data[0:int(len(cleaned_data)*0.9)]
+    print 'Number of elements left is ', len(cleaned_data)
     
     return cleaned_data
 

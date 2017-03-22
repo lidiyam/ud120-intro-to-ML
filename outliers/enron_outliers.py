@@ -14,6 +14,28 @@ data = featureFormat(data_dict, features)
 
 
 ### your code below
+max_salary = 0
+max_salary_key = None
+
+for key in data_dict:
+    if data_dict[key]["salary"] != 'NaN' and data_dict[key]["salary"] > max_salary:
+		max_salary = data_dict[key]["salary"]
+		max_salary_key = key
+
+data_dict.pop(max_salary_key, 0)
 
 
+for key in data_dict:
+    if data_dict[key]["salary"] != 'NaN' and data_dict[key]["bonus"] != 'NaN':
+	    if data_dict[key]["salary"] > 1.0e6 and data_dict[key]["bonus"] > 5.5e6:
+		    print key
+	
 
+for point in data:
+    salary = point[0]
+    bonus = point[1]
+    matplotlib.pyplot.scatter( salary, bonus )
+
+matplotlib.pyplot.xlabel("salary")
+matplotlib.pyplot.ylabel("bonus")
+matplotlib.pyplot.show()
